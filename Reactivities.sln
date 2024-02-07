@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reactivities.Domain", "back
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reactivities.Infrastructure", "backend\Reactivities.Infrastructure\Reactivities.Infrastructure.csproj", "{F7594232-B079-4CA0-9BF8-8E71EDC6FA83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reactivities.Persistence", "Reactivities.Persistence\Reactivities.Persistence.csproj", "{B1416562-7473-49CC-8E59-8AFD0C9B320A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reactivities.Persistence", "backend\Reactivities.Persistence\Reactivities.Persistence.csproj", "{B1416562-7473-49CC-8E59-8AFD0C9B320A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{776D311E-CD2E-4803-9F75-D94EF4217CDF}"
 EndProject
