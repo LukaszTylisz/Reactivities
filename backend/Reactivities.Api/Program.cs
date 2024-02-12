@@ -12,7 +12,14 @@ builder.Services
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
     .AddDbContext<DataContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")))
+    .AddCors(opt =>
+    {
+        opt.AddPolicy("CorsPolicy", policy =>
+        {
+            policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+        });
+    });
 
 var app = builder.Build();
 
@@ -26,6 +33,7 @@ if (app.Environment.IsDevelopment())
 app.MapControllers();
 
 app
+    .UseCors("CorsPolicy")
     .UseAuthorization()
     .UseHttpsRedirection();
 
