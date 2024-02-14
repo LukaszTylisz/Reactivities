@@ -1,4 +1,8 @@
+using System.Reflection;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Reactivities.Application.Activities;
+using Microsoft.Extensions.DependencyInjection;
 using Reactivities.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +17,7 @@ builder.Services
     .AddSwaggerGen()
     .AddDbContext<DataContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")))
+    .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(List.Handler).Assembly))
     .AddCors(opt =>
     {
         opt.AddPolicy("CorsPolicy", policy =>
@@ -20,6 +25,7 @@ builder.Services
             policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
         });
     });
+    
 
 var app = builder.Build();
 

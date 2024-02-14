@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Reactivities.Application\Reactivities.Application.csproj" />
+      <ProjectReference Include="..\Reactivities.Domain\Reactivities.Domain.csproj" />
     </ItemGroup>
 
 </Project>
