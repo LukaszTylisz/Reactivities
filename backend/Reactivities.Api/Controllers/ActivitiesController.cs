@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Reactivities.Application.Activities;
 using Reactivities.Domain;
-using Reactivities.Persistence;
 
 namespace Reactivities.Api.Controllers;
 

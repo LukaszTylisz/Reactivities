@@ -1,8 +1,5 @@
-using System.Reflection;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Reactivities.Application.Activities;
-using Microsoft.Extensions.DependencyInjection;
 using Reactivities.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
