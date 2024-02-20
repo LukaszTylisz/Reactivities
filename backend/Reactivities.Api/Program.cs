@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Reactivities.Application.Activities;
+using Reactivities.Application.Core;
 using Reactivities.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services
     .AddDbContext<DataContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")))
     .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(List.Handler).Assembly))
+    .AddAutoMapper(typeof(MappingProfiles).Assembly)
     .AddCors(opt =>
     {
         opt.AddPolicy("CorsPolicy", policy =>
