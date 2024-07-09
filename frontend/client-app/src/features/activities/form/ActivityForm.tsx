@@ -3,13 +3,13 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Activity } from "../../../models/activity";
+import { Activity } from "../../../app/models/activity";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { v4 as uuid } from 'uuid';
 
 export default observer(function ActivityForm() {
     const { activityStore } = useStore();
-    const { selectedActivity, createActivity, updateActivity,
+    const { createActivity, updateActivity,
         loading, loadActivity, loadingInitial } = activityStore;
     const { id } = useParams();
     const navigate = useNavigate();
