@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 using Reactivities.Application.Activities;
 using Reactivities.Application.Core;
 using Reactivities.Persistence;
@@ -12,6 +14,8 @@ public static class ApplicationServiceExtensions
         services
             .AddEndpointsApiExplorer()
             .AddSwaggerGen()
+            .AddFluentValidationAutoValidation()
+            .AddValidatorsFromAssemblyContaining<Create>()
             .AddDbContext<DataContext>(options =>
                 options.UseSqlServer(config.GetConnectionString("DefaultConnection")))
             .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(List.Handler).Assembly))
