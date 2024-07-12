@@ -1,5 +1,7 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { Activity } from "../models/activity";
+import { toast } from "react-toastify";
+import { router } from "../router/Routes";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -11,15 +13,42 @@ axios.defaults.baseURL = "http://localhost:5000/api";
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
-axios.interceptors.response.use(async (response) => {
-  try {
+axios.interceptors.response.use(
+  async (response) => {
     await sleep(1000);
     return response;
-  } catch (error) {
-    console.log(error);
-    return await Promise.reject(error);
+  },
+  (error: AxiosError) => {
+    const { data, status } = error.response as AxiosResponse;
+    switch (status) {
+      case 400:
+        if (data.errors) {
+          const modalStateErrors = [];
+          for (const key in data.errors) {
+            if (data.errors[key]) {
+              modalStateErrors.push(data.errors[key]);
+            }
+          }
+          throw modalStateErrors.flat();
+        } else {
+          toast.error(data);
+        }
+        break;
+      case 401:
+        toast.error("unauthorized");
+        break;
+      case 403:
+        toast.error("forbidden");
+        break;
+      case 404:
+        router.navigate("/not found");
+        break;
+      case 500:
+        toast.error("500 Internal Server Error");
+    }
+    return Promise.reject(error);
   }
-});
+);
 
 const requests = {
   get: <T>(url: string) => axios.get<T>(url).then(responseBody),
