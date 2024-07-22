@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Reactivities.Api.Services;
 
-public class TokenService
+public class TokenService(IConfiguration config)
 {
     public string CreateToken(AppUser user)
     {
@@ -17,7 +17,7 @@ public class TokenService
             new Claim(ClaimTypes.Email, user.Email),
         };
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super secret key"));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
         var tokenDescriptor = new SecurityTokenDescriptor
