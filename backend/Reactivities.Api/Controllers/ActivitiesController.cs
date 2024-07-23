@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Reactivities.Application.Activities;
 using Reactivities.Domain;
 
 namespace Reactivities.Api.Controllers;
 
+[AllowAnonymous]
 public class ActivitiesController : BaseApiController
 {
 
